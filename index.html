@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Python Soulweaver | Learn Python Through Darkness</title>
+    <meta name="description" content="Embark on a dark fantasy journey to master Python. Face bosses, embrace permadeath, and forge your code in the Abyssal Compiler.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Source+Code+Pro:wght@300;400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Particle Canvas Background -->
+    <canvas id="particle-canvas"></canvas>
+    
+    <!-- Main Container -->
+    <div class="container">
+        
+        <!-- Hero Section / Intro -->
+        <section id="intro-section" class="section-intro active">
+            <div class="hero-content">
+                <h1 class="glitch-text" data-text="THE PYTHON SOULWEAVER">THE PYTHON SOULWEAVER</h1>
+                <p class="subtitle">Enter the Abyssal Compiler</p>
+                <div class="lore-text">
+                    <p>You stand before the <span class="highlight">Abyssal Compiler</span>, where code is forged in shadow and logic burns eternal.</p>
+                    <p>The <span class="highlight-danger">Python Soulweaver</span> awaits—an ancient AI mentor bound to this cursed realm.</p>
+                    <p>Only through mastery of the arcane syntax will you survive the <span class="highlight-warning">Ten Trials</span>.</p>
+                    <p class="warning-text">⚠️ BEWARE: Failure means <span class="permadeath">PERMADEATH</span>. Your soul will be cast back to the beginning.</p>
+                </div>
+                <button id="begin-journey" class="btn-primary glow-effect">
+                    <span class="btn-icon">⚔</span>
+                    BEGIN YOUR DESCENT
+                    <span class="btn-icon">⚔</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Main Game Section -->
+        <section id="game-section" class="section-game">
+            
+            <!-- Soul Status HUD -->
+            <aside class="hud-panel">
+                <div class="hud-title">SOUL STATUS</div>
+                <div class="hud-content">
+                    <div class="hud-item">
+                        <span class="hud-label">Current Level:</span>
+                        <span class="hud-value" id="current-level">1/10</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Deaths:</span>
+                        <span class="hud-value permadeath" id="death-count">0</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Souls Collected:</span>
+                        <span class="hud-value highlight" id="souls-collected">0</span>
+                    </div>
+                </div>
+                
+                <!-- Abilities Panel -->
+                <div class="abilities-panel">
+                    <div class="hud-title">HALLOWED TRINKETS</div>
+                    <button class="ability-btn" id="ability-eye" data-ability="eye" title="All-Seeing Eye">
+                        <span class="ability-icon">👁️</span>
+                        <span class="ability-name">All-Seeing Eye</span>
+                        <span class="cooldown-text" id="cooldown-eye"></span>
+                    </button>
+                    <button class="ability-btn" id="ability-grimoire" data-ability="grimoire" title="Warded Grimoire">
+                        <span class="ability-icon">📖</span>
+                        <span class="ability-name">Warded Grimoire</span>
+                        <span class="cooldown-text" id="cooldown-grimoire"></span>
+                    </button>
+                    <button class="ability-btn ultimate" id="ability-flame" data-ability="flame" title="Echo of the First Flame">
+                        <span class="ability-icon">🔥</span>
+                        <span class="ability-name">Echo of First Flame</span>
+                        <span class="cooldown-text" id="cooldown-flame"></span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="game-content">
+                
+                <!-- Level Display -->
+                <div class="level-container">
+                    <div class="level-header">
+                        <h2 id="level-title" class="level-title">Level 1: The Awakening</h2>
+                        <div id="boss-indicator" class="boss-indicator hidden">
+                            <span class="skull-icon">💀</span>
+                            BOSS ENCOUNTER
+                            <span class="skull-icon">💀</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Atmosphere Description -->
+                    <div class="atmosphere-box">
+                        <div class="atmosphere-icon">🌫️</div>
+                        <div id="atmosphere-text" class="atmosphere-text">
+                            A desolate landscape smelling of ozone and burnt parchment. Binary code moss hangs from dead trees.
+                        </div>
+                    </div>
+                    
+                    <!-- Boss Section (Conditional) -->
+                    <div id="boss-section" class="boss-section hidden">
+                        <div class="boss-card">
+                            <div class="boss-image-container">
+                                <img id="boss-image" src="" alt="Boss" class="boss-image">
+                                <div class="boss-overlay"></div>
+                            </div>
+                            <div class="boss-info">
+                                <h3 id="boss-name" class="boss-name">The Syntax Sentinel</h3>
+                                <div class="boss-dialogue" id="boss-dialogue">
+                                    "To pass, you must choose. There is no middle ground."
+                                </div>
+                                <div class="boss-soundtrack">
+                                    <span class="soundtrack-icon">🎵</span>
+                                    <span id="boss-soundtrack">Rhythmic war drums echo through the void...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Challenge Description -->
+                    <div class="challenge-box">
+                        <h3 class="challenge-title">⚔️ THE CHALLENGE</h3>
+                        <div id="challenge-description" class="challenge-description">
+                            The Soulweaver speaks: "Create a Vessel to hold your first essence..."
+                        </div>
+                        <div id="challenge-hint" class="challenge-hint hidden"></div>
+                    </div>
+                    
+                    <!-- Code Editor -->
+                    <div class="editor-container">
+                        <div class="editor-header">
+                            <span class="editor-title">⚡ THE ABYSSAL COMPILER</span>
+                            <button id="reset-code" class="btn-secondary-small">Reset Code</button>
+                        </div>
+                        <div class="editor-wrapper">
+                            <div class="line-numbers" id="line-numbers">1</div>
+                            <textarea 
+                                id="code-editor" 
+                                class="code-editor" 
+                                spellcheck="false"
+                                placeholder="# Write your Python code here...&#10;# The Soulweaver watches..."
+                            ></textarea>
+                        </div>
+                        <div class="editor-footer">
+                            <button id="submit-code" class="btn-primary">
+                                <span class="btn-icon">⚡</span>
+                                SUBMIT TO THE VOID
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Output Console -->
+                    <div class="console-container">
+                        <div class="console-header">📜 COMPILER OUTPUT</div>
+                        <div id="console-output" class="console-output">
+                            <span class="console-ready">The Abyssal Compiler awaits your code...</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </main>
+        </section>
+        
+    </div>
+
+    <!-- Death Modal -->
+    <div id="death-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content death-modal">
+            <div class="modal-skull">💀</div>
+            <h2 class="modal-title death-title">YOUR SOUL HAS BEEN CRUSHED</h2>
+            <p class="modal-text">The darkness has consumed you. Your knowledge fades to nothing.</p>
+            <p class="modal-warning">You must return to the beginning and prove your worth once more.</p>
+            <div class="modal-actions">
+                <button id="use-flame-ability" class="btn-primary hidden">
+                    <span class="btn-icon">🔥</span>
+                    USE ECHO OF FIRST FLAME
+                </button>
+                <button id="accept-death" class="btn-danger">
+                    ACCEPT YOUR FATE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div id="victory-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content victory-modal">
+            <div class="modal-icon">✨</div>
+            <h2 class="modal-title victory-title">TRIAL CONQUERED</h2>
+            <p class="modal-text" id="victory-text">You have proven your mastery. The path forward reveals itself...</p>
+            <div class="modal-actions">
+                <button id="next-level" class="btn-primary glow-effect">
+                    <span class="btn-icon">→</span>
+                    ADVANCE TO THE NEXT TRIAL
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Victory Modal -->
+    <div id="final-victory-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content final-victory-modal">
+            <div class="modal-icon final-icon">👑</div>
+            <h2 class="modal-title final-title">THE VOID COMPILER HAS FALLEN</h2>
+            <p class="modal-text">You have conquered all Ten Trials. You are now a true <span class="highlight">Python Soulweaver</span>.</p>
+            <p class="modal-text">The Abyssal Compiler bends to your will. The darkness is yours to command.</p>
+            <div class="stats-summary">
+                <div class="stat-item">
+                    <span class="stat-label">Total Deaths:</span>
+                    <span class="stat-value" id="final-deaths">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Souls Collected:</span>
+                    <span class="stat-value" id="final-souls">10</span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="restart-game" class="btn-primary glow-effect">
+                    <span class="btn-icon">🔄</span>
+                    BEGIN A NEW JOURNEY
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="particles.js"></script>
+    <script src="audio-manager.js"></script>
+    <script src="levels.js"></script>
+    <script src="abilities.js"></script>
+    <script src="code-editor.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
