@@ -33,29 +33,6 @@ The Python Soulweaver is an interactive, game-based Python tutorial where you le
 2. Open `index.html` in a modern web browser (Chrome, Firefox, Edge recommended)
 3. No build process or dependencies required!
 
-### File Structure
-
-```
-The Python Soulweaver/
-│
-├── index.html              # Main HTML structure
-├── styles.css              # Dark fantasy styling
-├── game.js                 # Core game engine
-├── levels.js               # All 10 level definitions
-├── abilities.js            # Hallowed trinket system
-├── particles.js            # Visual effects
-├── audio-manager.js        # Soundtrack descriptions
-├── code-editor.js          # Custom Python editor
-├── assets/
-│   └── images/
-│       └── bosses/         # AI-generated boss artwork
-│           ├── boss_syntax_sentinel.jpg
-│           ├── boss_iterative_hydra.jpg
-│           ├── boss_object_archmage.jpg
-│           └── boss_void_compiler.jpg
-└── README.md               # This file
-```
-
 ---
 
 ##  How to Play
@@ -169,15 +146,6 @@ By completing The Python Soulweaver, you will master:
 
 ---
 
-##  Credits
-
-**Created by**: The Antigravity Team  
-**Concept**: Dark fantasy meets Python education  
-**Art Style**: Souls-like, gothic horror, cyberpunk fusion  
-**Boss Artwork**: AI-generated using advanced image synthesis
-
----
-
 ##  License
 
 This project is open source and available for educational purposes.
@@ -197,3 +165,4 @@ Potential additions:
 ---
 
 **⚔️ Enter the Abyss. Master Python. Become the Soulweaver. ⚔️**
+
