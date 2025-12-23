@@ -148,7 +148,12 @@ By completing The Python Soulweaver, you will master:
 
 ##  License
 
-This project is open source and available for educational purposes.
+This project is open source and available for educational purposes. 
+
+ ##  Audio License 
+ **Incompetech** (Kevin MacLeod)
+   - URL: https://incompetech.com
+   - License: Creative Commons
 
 ---
 
@@ -165,4 +170,5 @@ Potential additions:
 ---
 
 **⚔️ Enter the Abyss. Master Python. Become the Soulweaver. ⚔️**
+
 
